@@ -34,6 +34,9 @@ namespace Index.App.ViewModels
     public ObservableCollection<LauncherItem> Items => _items;
     public LauncherItem SelectedItem { get; set; }
 
+    public bool HasItems { get; private set; }
+    public string? StatusMessage { get; private set; }
+
     public DelegateCommand ScanPathCommand { get; }
     public DelegateCommand RemoveSelectedPathCommand { get; }
     public DelegateCommand LaunchCommand { get; }
@@ -109,6 +112,9 @@ namespace Index.App.ViewModels
       _items.Clear();
       foreach ( var newItem in newItems )
         _items.Add( newItem );
+
+      HasItems = _items.Count > 0;
+      OnPropertyChanged( nameof( HasItems ) );
     }
 
     private void ScanPath()
@@ -119,13 +125,20 @@ namespace Index.App.ViewModels
 
       var identificationResults = _profileManager.ScanPathForSupportedGames( gamePath );
       if ( !identificationResults.Any() )
-        return; // TODO: Show dialog
+      {
+        SetStatus( "No supported game was found in that folder." );
+        return;
+      }
 
       var pathsAdded = 0;
+      var pathsSkipped = 0;
       foreach ( var result in identificationResults )
       {
         if ( _gamePathRepository.CheckIfGamePathAlreadyExists( result.GamePath ) )
+        {
+          pathsSkipped++;
           continue;
+        }
 
         _gamePathRepository.Add( new GamePath
         {
@@ -139,6 +152,15 @@ namespace Index.App.ViewModels
         _gamePathRepository.SaveChanges();
 
       ReloadLauncherItems();
+
+      if ( pathsAdded == 0 )
+        SetStatus( pathsSkipped == 1
+          ? "That game is already in the list."
+          : "Those games are already in the list." );
+      else if ( pathsAdded == 1 )
+        SetStatus( "Added 1 game. Select it and launch, or double-click the row." );
+      else
+        SetStatus( $"Added {pathsAdded} games. Select one and launch, or double-click a row." );
     }
 
     private void RemoveSelectedGamePath()
@@ -154,6 +176,15 @@ namespace Index.App.ViewModels
       _gamePathRepository.SaveChanges();
 
       ReloadLauncherItems();
+      SetStatus( HasItems
+        ? "Removed the selected game."
+        : null );
+    }
+
+    private void SetStatus( string? message )
+    {
+      StatusMessage = message;
+      OnPropertyChanged( nameof( StatusMessage ) );
     }
 
     private ImageSource? LoadGameIcon( IGameProfile gameProfile )

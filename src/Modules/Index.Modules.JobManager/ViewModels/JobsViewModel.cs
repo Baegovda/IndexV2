@@ -16,6 +16,7 @@ namespace Index.Modules.JobManager.ViewModels
     private Dictionary<Guid, JobViewModel> _jobLookup;
 
     public ObservableCollection<JobViewModel> Jobs { get; }
+    public bool HasJobs { get; private set; }
 
     public JobsViewModel( IJobManager jobManager )
     {
@@ -43,6 +44,8 @@ namespace Index.Modules.JobManager.ViewModels
         Jobs.Add( model );
         _jobLookup.Add( job.Id, model );
       }
+
+      RefreshHasJobs();
     }
 
     private void OnJobCompleted( object? sender, IJob job )
@@ -55,6 +58,22 @@ namespace Index.Modules.JobManager.ViewModels
         Jobs.Remove( model );
         _jobLookup.Remove( job.Id );
       }
+
+      RefreshHasJobs();
+    }
+
+    private void RefreshHasJobs()
+    {
+      bool hasJobs;
+      lock ( _collectionLock )
+        hasJobs = Jobs.Count > 0;
+
+      void Apply() => HasJobs = hasJobs;
+
+      if ( Dispatcher.CheckAccess() )
+        Apply();
+      else
+        Dispatcher.BeginInvoke( Apply );
     }
 
   }

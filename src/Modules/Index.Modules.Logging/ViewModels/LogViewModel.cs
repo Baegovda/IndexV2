@@ -33,6 +33,8 @@ namespace Index.Modules.Logging.ViewModels
       get => _messages;
     }
 
+    public bool HasMessages { get; private set; }
+
     #endregion
 
     #region Constructor
@@ -56,13 +58,30 @@ namespace Index.Modules.Logging.ViewModels
 
     private void OnLogMessageReceived( LogMessage message )
     {
+      var hasMessages = false;
       lock ( _messagesLock )
       {
         _messages.Add( message );
 
         while ( _messages.Count > MAX_LOG_LINES )
           _messages.RemoveAt( 0 );
+
+        hasMessages = _messages.Count > 0;
       }
+
+      void Apply()
+      {
+        if ( HasMessages == hasMessages )
+          return;
+
+        HasMessages = hasMessages;
+        OnPropertyChanged( nameof( HasMessages ) );
+      }
+
+      if ( Dispatcher.CheckAccess() )
+        Apply();
+      else
+        Dispatcher.BeginInvoke( Apply );
     }
 
     #endregion

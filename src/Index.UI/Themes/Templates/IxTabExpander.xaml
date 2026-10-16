@@ -36,15 +36,17 @@
                       IsItemsHost="True" />
 
             <ToggleButton x:Name="PART_PinButton"
-                          Height="14"
-                          Width="14"
+                          Height="22"
+                          Width="22"
                           Grid.Row="0"
                           Grid.Column="0"
-                          Margin="5,0"
+                          Margin="6,0"
+                          Padding="0"
                           Background="Transparent"
                           BorderThickness="0"
                           HorizontalAlignment="Right"
                           Panel.ZIndex="1"
+                          ToolTip="Keep this panel open"
                           IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}">
                 <ToggleButton.Content>
                     <controls:IxIcon SegoeIcon="{x:Static ui:SegoeIcon.Pinned}" />

@@ -25,15 +25,17 @@
                 Background="{DynamicResource Brushes.Tertiary.Background.Static}"
                 HorizontalAlignment="Stretch">
             <TextBlock Text="Meshes"
+                       FontWeight="SemiBold"
                        Foreground="{DynamicResource Brushes.Foreground.Static}"
-                       Padding="5,2"
+                       Padding="8,6"
                        VerticalAlignment="Center" />
         </Border>
         <!--#endregion-->
 
         <controls:IxTextBox Grid.Row="1"
+                            Padding="6,4"
                             Panel.ZIndex="1"
-                            PlaceholderText="Search"
+                            PlaceholderText="Search meshes"
                             Icon="{x:Static ui:SegoeIcon.Search}"
                             Text="{Binding Scene.SearchTerm, UpdateSourceTrigger=PropertyChanged}" />
 

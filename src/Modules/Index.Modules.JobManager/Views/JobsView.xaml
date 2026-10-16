@@ -18,9 +18,9 @@
                 <Style TargetType="{x:Type ListViewItem}"
                        BasedOn="{StaticResource {x:Type ListViewItem}}">
                     <Setter Property="Margin" Value="0" />
-                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Padding" Value="6,2" />
                     <Setter Property="FontSize" Value="12" />
-                    <Setter Property="Height" Value="20" />
+                    <Setter Property="MinHeight" Value="24" />
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Setter Property="VerticalContentAlignment" Value="Stretch" />
                 </Style>
@@ -66,5 +66,15 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <TextBlock Margin="16"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   Text="No jobs are running."
+                   IsHitTestVisible="False"
+                   Foreground="{DynamicResource Brushes.Foreground.Disabled}"
+                   Visibility="{Binding HasJobs, Converter={StaticResource InverseVisibilityConverter}}" />
     </Grid>
 </UserControl>

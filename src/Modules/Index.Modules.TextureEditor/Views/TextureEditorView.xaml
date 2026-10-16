@@ -92,20 +92,46 @@
 
         <local:TextureInformationView Grid.Row="1"
                                       Grid.Column="0"
+                                      Margin="8"
                                       HorizontalAlignment="Left"
                                       VerticalAlignment="Bottom"
                                       TextureInformation="{Binding Texture.TextureInformation}" />
+
+        <TextBlock Grid.Row="1"
+                   Grid.Column="0"
+                   Margin="24"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   Text="This texture has no images to preview."
+                   IsHitTestVisible="False"
+                   Foreground="{DynamicResource Brushes.Foreground.Disabled}">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Texture.ImageCount}" Value="0">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
         <DockPanel x:Name="ImagePicker" 
                    Grid.Row="1"
                    Grid.Column="1"
                    Width="100">
             <Border DockPanel.Dock="Top"
-                    BorderThickness="1"
+                    Padding="8,6"
+                    BorderThickness="0,0,0,1"
                     BorderBrush="{DynamicResource Brushes.Quarternary.Border.Static}"
                     Background="{DynamicResource Brushes.Quarternary.Background.Static}">
                 <TextBlock VerticalAlignment="Center"
-                           Text="Images" />
+                           FontWeight="SemiBold"
+                           Text="Images"
+                           ToolTip="Other images in this texture" />
             </Border>
             <ListView x:Name="ImagesList"
                       DockPanel.Dock="Bottom"

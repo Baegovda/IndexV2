@@ -12,24 +12,26 @@
             </Grid.RowDefinitions>
 
             <GroupBox Grid.Row="0"
-                      Margin="5">
+                      Margin="8,8,8,4"
+                      Padding="4">
                 <GroupBox.Header>
                     <DockPanel>
                         <TextBlock VerticalAlignment="Center"
                                    DockPanel.Dock="Left"
-                                   Text="Export Path" />
+                                   Text="Export folder" />
 
-                        <CheckBox HorizontalAlignment="Right"
+                        <CheckBox Margin="16,0,0,0"
+                                  HorizontalAlignment="Right"
                                   VerticalAlignment="Center"
                                   DockPanel.Dock="Right"
-                                  Content="Overwrite Existing"
-                                  FlowDirection="RightToLeft"
+                                  Content="Overwrite existing files"
+                                  ToolTip="Replace files that are already in the export folder"
                                   IsChecked="{Binding Options.OverwriteExisting}" />
 
                     </DockPanel>
                 </GroupBox.Header>
 
-                <controls:IxFileBrowserBox Height="22"
+                <controls:IxFileBrowserBox Margin="4,6,4,4"
                                            DialogPathType="Directory"
                                            Path="{Binding Options.ExportPath, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
 
