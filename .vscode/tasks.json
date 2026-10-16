@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/Index.sln",
+        "--configuration",
+        "Debug",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary;ForceNoAlign"
+      ],
+      "problemMatcher": {
+        "owner": "dotnet",
+        "fileLocation": ["autoDetect", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.*)\\((\\d+),(\\d+)\\):\\s+error\\s+(\\S+):\\s+(.*?)(?:\\s+\\[.*\\])?$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "code": 4,
+          "message": 5
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "run",
+      "dependsOn": "build",
+      "dependsOrder": "sequence",
+      "command": "powershell",
+      "type": "process",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "Start-Process -FilePath '${workspaceFolder}\\src\\Index.App\\bin\\Debug\\net8.0-windows7.0\\Index.App.exe'"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared",
+        "close": true
+      }
+    }
+  ]
+}

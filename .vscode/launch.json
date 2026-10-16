@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Index",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/Index.App/bin/Debug/net8.0-windows7.0/Index.App.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/Index.App/bin/Debug/net8.0-windows7.0",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    }
+  ]
+}

@@ -8,6 +8,7 @@
 		<FileVersion>0.3.0.*</FileVersion>
 		<Deterministic>false</Deterministic>
 		<RunPostBuildEvent>Always</RunPostBuildEvent>
+		<ILRepackTargetsFile>$(MSBuildThisFileDirectory)..\DisableDefaultILRepack.targets</ILRepackTargetsFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -26,36 +27,35 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ILRepack.MSBuild.Task" Version="2.0.13" />
+		<PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.48" />
 	</ItemGroup>
 
-	<Target Name="ILRepack" AfterTargets="Build">
-
+	<Target Name="RepackGameProfile" AfterTargets="Build">
 		<PropertyGroup>
-			<WorkingDirectory>$(MSBuildThisFileDirectory)bin\$(Configuration)\$(TargetFramework)</WorkingDirectory>
+			<_ProfileDll>$(TargetDir)$(TargetFileName)</_ProfileDll>
+			<_MergedDll>$(TargetDir)$(TargetName).merged.dll</_MergedDll>
 		</PropertyGroup>
-
 		<ItemGroup>
-			<InputAssemblies Include="LibSaber.dll" />
-			<InputAssemblies Include="LibSaber.Halo2A.dll" />
+			<_RepackInputs Include="$(_ProfileDll)" />
+			<_RepackInputs Include="$(TargetDir)LibSaber.dll" />
+			<_RepackInputs Include="$(TargetDir)LibSaber.Halo2A.dll" />
 		</ItemGroup>
-
 		<ItemGroup>
-			<InternalizeExcludeAssemblies Include="^LibSaber" />
+			<_RepackLibraryPath Include="$(TargetDir)" />
 		</ItemGroup>
-
 		<ILRepack
+			Parallel="true"
 			DebugInfo="true"
-			OutputType="$(OutputType)"
-			MainAssembly="$(AssemblyName).dll"
-			OutputAssembly="$(AssemblyName).dll"
-			InputAssemblies="@(InputAssemblies)"
-			InternalizeExcludeAssemblies="@(InternalizeExcludeAssemblies)"
-			WorkingDirectory="$(WorkingDirectory)" />
-
+			InputAssemblies="@(_RepackInputs)"
+			LibraryPath="@(_RepackLibraryPath)"
+			OutputFile="$(_MergedDll)"
+			TargetKind="SameAsPrimaryAssembly" />
+		<Delete Files="$(_ProfileDll);$(TargetDir)$(TargetName).pdb" />
+		<Move SourceFiles="$(_MergedDll)" DestinationFiles="$(_ProfileDll)" />
+		<Move SourceFiles="$(TargetDir)$(TargetName).merged.pdb" DestinationFiles="$(TargetDir)$(TargetName).pdb" Condition="Exists('$(TargetDir)$(TargetName).merged.pdb')" />
 	</Target>
 
-	<Target Name="PostBuild" AfterTargets="ILRepack">
+	<Target Name="PostBuild" AfterTargets="RepackGameProfile">
 		<Exec Command="mkdir &quot;$(SolutionDir)src\Index.App\bin\$(Configuration)\net8.0-windows7.0\GameProfiles&quot;" ContinueOnError="true" />
 		<Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)src\Index.App\bin\$(Configuration)\net8.0-windows7.0\GameProfiles\$(TargetName).dll&quot;" />
 		<Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;$(SolutionDir)src\Index.App\bin\$(Configuration)\net8.0-windows7.0\GameProfiles\$(TargetName).pdb&quot;" />
