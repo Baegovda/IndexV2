@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Index.UI.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="22" d:DesignWidth="500"
-             Height="20">
+             d:DesignHeight="28" d:DesignWidth="500"
+             MinHeight="28">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -15,14 +15,19 @@
 
         <TextBox x:Name="PathTextBox"
                  Grid.Column="0"
+                 MinHeight="26"
+                 Padding="6,2"
+                 VerticalContentAlignment="Center"
+                 ToolTip="{Binding Path, RelativeSource={RelativeSource AncestorType={x:Type local:IxFileBrowserBox}}}"
                  TextChanged="OnPathChanged"
                  Text="{Binding Path, RelativeSource={RelativeSource AncestorType={x:Type local:IxFileBrowserBox}}}" />
 
         <Button x:Name="BrowseButton"
                 Grid.Column="1"
-                Content="..."
-                Padding="8,0"
-                Margin="3,0,0,0"
+                Content="Browse"
+                MinWidth="72"
+                Padding="10,2"
+                Margin="6,0,0,0"
                 Click="OnBrowseButtonClick"
                 ToolTip="Browse" />
 

@@ -17,7 +17,6 @@ namespace Index.Modules.DataExplorer.ViewModels
   {
     #region Data Members
 
-    private string _searchTerm;
     private List<TNodeViewModel> _searchGraph;
 
     #endregion
@@ -26,6 +25,11 @@ namespace Index.Modules.DataExplorer.ViewModels
 
     public IxObservableCollection<TNodeViewModel> Nodes { get; private set; }
     public ICollectionView NodesView { get; private set; }
+
+    public bool IsInitialized { get; private set; }
+    public bool HasNodes { get; private set; }
+    public string SearchTerm { get; private set; } = string.Empty;
+    public bool ShowNoSearchResults { get; private set; }
 
     public ICommand SearchCommand { get; }
 
@@ -55,6 +59,11 @@ namespace Index.Modules.DataExplorer.ViewModels
       _searchGraph = InitializeSearchGraph( Nodes );
       NodesView = CollectionViewSource.GetDefaultView( Nodes );
 
+      HasNodes = Nodes.Count > 0;
+      SearchTerm = string.Empty;
+      ShowNoSearchResults = false;
+      IsInitialized = true;
+
       OnInitializationComplete();
     }
 
@@ -64,6 +73,9 @@ namespace Index.Modules.DataExplorer.ViewModels
 
     private async void ApplySearchTerm( string searchTerm )
     {
+      if ( Nodes is null || _searchGraph is null )
+        return;
+
       await Task.Run( () =>
       {
         Nodes.SuppressNotifications = true;
@@ -98,11 +110,18 @@ namespace Index.Modules.DataExplorer.ViewModels
 
         Nodes.SuppressNotifications = false;
 
+        var term = searchTerm ?? string.Empty;
+        var showNoResults = !string.IsNullOrWhiteSpace( term )
+                            && Nodes.All( node => !node.IsVisible );
+
         Application.Current.Dispatcher.BeginInvoke( () =>
         {
           foreach ( var node in _searchGraph )
             if ( !node.IsLeaf )
               node.ChildrenView.Refresh();
+
+          SearchTerm = term;
+          ShowNoSearchResults = HasNodes && showNoResults;
         } );
       } );
     }

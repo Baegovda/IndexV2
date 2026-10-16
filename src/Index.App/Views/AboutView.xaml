@@ -54,11 +54,12 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
 
-            <StackPanel Margin="0,30"
+            <StackPanel Margin="0,8,0,20"
                         Orientation="Horizontal">
                 <Border Background="Transparent"
                         IsHitTestVisible="True"
-                        Cursor="Hand">
+                        Cursor="Hand"
+                        ToolTip="Open Haus on Ko-fi">
                     <Border.InputBindings>
                         <MouseBinding MouseAction="LeftClick"
                                       Command="commands:GlobalCommands.OpenWebPageCommand"
@@ -70,14 +71,8 @@
                           Stretch="Uniform"
                           Data="{Binding Source={StaticResource Path.Haus}, Path=Data}" />
                 </Border>
-                <TextBlock Margin="0,0,10,0"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Background="Transparent"
-                           IsHitTestVisible="True"
-                           Cursor="Hand">
-                </TextBlock>
-                <Label HorizontalAlignment="Center"
+                <Label Margin="12,0,0,0"
+                       HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Content="Developed by Haus"
                        Foreground="{DynamicResource Brushes.Foreground.Static}"
@@ -103,27 +98,27 @@
                     </Rectangle.Fill>
                 </Rectangle>
 
-                <Label Padding="0"
+                <Label Padding="0,3"
                        HorizontalAlignment="Center"
                        Content="Gravemind2401"
                        Foreground="{DynamicResource Brushes.Foreground.Static}"
                        FontSize="18" />
-                <Label Padding="0"
+                <Label Padding="0,3"
                        HorizontalAlignment="Center"
                        Content="REDxEYE"
                        Foreground="{DynamicResource Brushes.Foreground.Static}"
                        FontSize="18" />
-                <Label Padding="0"
+                <Label Padding="0,3"
                        HorizontalAlignment="Center"
                        Content="sleepyzay"
                        Foreground="{DynamicResource Brushes.Foreground.Static}"
                        FontSize="18" />
-                <Label Padding="0"
+                <Label Padding="0,3"
                        HorizontalAlignment="Center"
                        Content="Unordinal"
                        Foreground="{DynamicResource Brushes.Foreground.Static}"
                        FontSize="18" />
-                <Label Padding="0"
+                <Label Padding="0,3"
                        HorizontalAlignment="Center"
                        Content="Zatarita"
                        Foreground="{DynamicResource Brushes.Foreground.Static}"

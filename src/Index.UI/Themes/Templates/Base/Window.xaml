@@ -79,18 +79,21 @@
 
                     <Button x:Name="PART_MinimizeButton"
                             Content="&#xE921;"
+                            ToolTip="Minimize"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Command="{x:Static windows:WindowCommands.MinimizeWindowCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
 
                     <Button x:Name="PART_MaximizeButton"
                             Content="&#xE923;"
+                            ToolTip="Maximize"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Command="{x:Static windows:WindowCommands.MaximizeWindowCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
 
                     <Button x:Name="PART_CloseButton"
                             Content="&#xE8BB;"
+                            ToolTip="Close"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Command="{x:Static windows:WindowCommands.CloseWindowCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
