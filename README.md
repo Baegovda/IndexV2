@@ -25,3 +25,13 @@ Saber Interactive 게임 속을 열어, 텍스처와 모델을 꺼내 쓰는 Win
 Windows와 [.NET 8 데스크톱 런타임](https://dotnet.microsoft.com/download/dotnet/8.0)이 필요합니다. 앱을 연 뒤 게임이 설치된 폴더를 지정하면 됩니다.
 
 Index는 [Haus](https://github.com/Wildenhaus)의 Index를 여러 게임이 열리도록 다시 만든 프로그램입니다.
+
+## 업데이트
+
+프로그램이 바뀔 때마다 이 목록의 맨 위를 고칩니다.
+
+- 첫 화면에 프로그램 설명과 이 업데이트 기록을 두었다.
+- 디버그 빌드에서 LibSaber를 게임 프로필 안에 넣어, 프로필이 그 파일을 따로 찾지 않아도 열리게 했다. F5로 앱을 빌드하고 실행한다.
+- Warhammer 40,000: Space Marine 2를 열 수 있다. 4K 텍스처 팩, 더 빠른 리소스 목록, 메시 보정이 들어 있다.
+- 모델을 glTF 2로 내보낼 수 있다. 모델 뷰포트와 텍스처 미리보기를 다듬고, Halo 2 Anniversary 프롭이 열리지 않던 문제를 고쳤다.
+- 시작 화면을 넣고, 숫자 형식을 미국 영어로 고정해 소수점이 깨지지 않게 했다.
