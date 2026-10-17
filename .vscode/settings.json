@@ -1,0 +1,7 @@
+{
+  "dotnet.defaultSolution": "Suckdex.sln",
+  "dotnet.backgroundAnalysis.compilerDiagnosticsScope": "none",
+  "dotnet.backgroundAnalysis.analyzerDiagnosticsScope": "none",
+  "dotnet.server.suppressLspErrorToasts": true,
+  "dotnet.server.suppressMiscellaneousFilesToasts": true
+}

@@ -7,32 +7,22 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/Index.sln",
+        "${workspaceFolder}/Suckdex.sln",
         "--configuration",
         "Debug",
         "/property:GenerateFullPaths=true",
-        "/consoleloggerparameters:NoSummary;ForceNoAlign"
+        "/consoleloggerparameters:ErrorsOnly;NoSummary;ForceNoAlign"
       ],
-      "problemMatcher": {
-        "owner": "dotnet",
-        "fileLocation": ["autoDetect", "${workspaceFolder}"],
-        "pattern": {
-          "regexp": "^(.*)\\((\\d+),(\\d+)\\):\\s+error\\s+(\\S+):\\s+(.*?)(?:\\s+\\[.*\\])?$",
-          "file": 1,
-          "line": 2,
-          "column": 3,
-          "code": 4,
-          "message": 5
-        }
-      },
+      "problemMatcher": [],
       "group": {
         "kind": "build",
         "isDefault": true
       },
       "presentation": {
-        "reveal": "silent",
-        "revealProblems": "onProblem",
-        "panel": "shared"
+        "reveal": "never",
+        "revealProblems": "never",
+        "panel": "shared",
+        "close": true
       }
     },
     {
@@ -44,7 +34,7 @@
       "args": [
         "-NoProfile",
         "-Command",
-        "Start-Process -FilePath '${workspaceFolder}\\src\\Index.App\\bin\\Debug\\net8.0-windows7.0\\Index.App.exe'"
+        "Start-Process -FilePath '${workspaceFolder}\\src\\Suckdex.App\\bin\\Debug\\net8.0-windows7.0\\Suckdex.exe'"
       ],
       "problemMatcher": [],
       "group": {

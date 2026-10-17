@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyVersion>1.1.4.0</AssemblyVersion>
+		<FileVersion>1.1.4.0</FileVersion>
+		<Deterministic>false</Deterministic>
+		<RunPostBuildEvent>Always</RunPostBuildEvent>
+		<ILRepackTargetsFile>$(MSBuildThisFileDirectory)..\DisableDefaultILRepack.targets</ILRepackTargetsFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="GameIcon.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="GameIcon.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\LibSaber\src\LibSaber.Halo2A\LibSaber.Halo2A.csproj" />
+		<ProjectReference Include="..\..\..\..\LibSaber\src\LibSaber\LibSaber.csproj" />
+		<ProjectReference Include="..\..\Suckdex.Core\Suckdex.Core.csproj" />
+		<ProjectReference Include="..\..\Suckdex.Domain\Suckdex.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.48" />
+	</ItemGroup>
+
+	<Target Name="RepackGameProfile" AfterTargets="Build">
+		<PropertyGroup>
+			<_ProfileDll>$(TargetDir)$(TargetFileName)</_ProfileDll>
+			<_MergedDll>$(TargetDir)$(TargetName).merged.dll</_MergedDll>
+		</PropertyGroup>
+		<ItemGroup>
+			<_RepackInputs Include="$(_ProfileDll)" />
+			<_RepackInputs Include="$(TargetDir)LibSaber.dll" />
+			<_RepackInputs Include="$(TargetDir)LibSaber.Halo2A.dll" />
+		</ItemGroup>
+		<ItemGroup>
+			<_RepackLibraryPath Include="$(TargetDir)" />
+		</ItemGroup>
+		<ILRepack
+			Parallel="true"
+			DebugInfo="true"
+			InputAssemblies="@(_RepackInputs)"
+			LibraryPath="@(_RepackLibraryPath)"
+			OutputFile="$(_MergedDll)"
+			TargetKind="SameAsPrimaryAssembly" />
+		<Delete Files="$(_ProfileDll);$(TargetDir)$(TargetName).pdb" />
+		<Move SourceFiles="$(_MergedDll)" DestinationFiles="$(_ProfileDll)" />
+		<Move SourceFiles="$(TargetDir)$(TargetName).merged.pdb" DestinationFiles="$(TargetDir)$(TargetName).pdb" Condition="Exists('$(TargetDir)$(TargetName).merged.pdb')" />
+	</Target>
+
+	<Target Name="PostBuild" AfterTargets="RepackGameProfile">
+		<MakeDir Directories="$(SolutionDir)src\Suckdex.App\bin\$(Configuration)\net8.0-windows7.0\GameProfiles" />
+		<Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)src\Suckdex.App\bin\$(Configuration)\net8.0-windows7.0\GameProfiles\$(TargetName).dll&quot;" />
+		<Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;$(SolutionDir)src\Suckdex.App\bin\$(Configuration)\net8.0-windows7.0\GameProfiles\$(TargetName).pdb&quot;" />
+	</Target>
+
+</Project>

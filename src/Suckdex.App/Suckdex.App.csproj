@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+	<PackageIcon>Icon.ico</PackageIcon>
+	<ApplicationIcon>Icon.ico</ApplicationIcon>
+	<XamlDebuggingInformation>True</XamlDebuggingInformation>
+	<AssemblyName>Suckdex</AssemblyName>
+	<Product>Suckdex</Product>
+	<AssemblyVersion>1.1.4.0</AssemblyVersion>
+	<FileVersion>1.1.4.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Suckdex.Domain\Suckdex.Domain.csproj" />
+    <ProjectReference Include="..\Suckdex.UI\Suckdex.UI.csproj" />
+    <ProjectReference Include="..\Modules\Suckdex.Modules.DataExplorer\Suckdex.Modules.DataExplorer.csproj" />
+    <ProjectReference Include="..\Modules\Suckdex.Modules.JobManager\Suckdex.Modules.JobManager.csproj" />
+    <ProjectReference Include="..\Modules\Suckdex.Modules.Logging\Suckdex.Modules.Logging.csproj" />
+    <ProjectReference Include="..\Modules\Suckdex.Modules.MeshEditor\Suckdex.Modules.MeshEditor.csproj" />
+    <ProjectReference Include="..\Modules\Suckdex.Modules.TextEditor\Suckdex.Modules.TextEditor.csproj" />
+    <ProjectReference Include="..\Modules\Suckdex.Modules.TextureEditor\Suckdex.Modules.TextureEditor.csproj" />
+  </ItemGroup>
+
+	<PropertyGroup>
+		<BuildDate>$([System.DateTime]::UtcNow.ToString("yyyy-MM-dd HH:mm:ss"))</BuildDate>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+			<_Parameter1>BuildDate</_Parameter1>
+			<_Parameter2>$(BuildDate)</_Parameter2>
+		</AssemblyAttribute>
+	</ItemGroup>
+	
+  <ItemGroup>
+    <Resource Include="Icon.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\LauncherView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

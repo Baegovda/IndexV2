@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Suckdex.Core\Suckdex.Core.csproj" />
+    <ProjectReference Include="..\..\Suckdex.Domain\Suckdex.Domain.csproj" />
+    <ProjectReference Include="..\..\Suckdex.UI\Suckdex.UI.csproj" />
+  </ItemGroup>
+
+</Project>

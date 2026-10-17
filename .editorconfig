@@ -223,3 +223,56 @@ dotnet_naming_style.begins_with_i.required_prefix = I
 dotnet_naming_style.begins_with_i.required_suffix = 
 dotnet_naming_style.begins_with_i.word_separator = 
 dotnet_naming_style.begins_with_i.capitalization = pascal_case
+
+#### Diagnostics ####
+
+# The existing code already reports these. Keep them out of the Problems list.
+dotnet_diagnostic.IDE0005.severity = none
+dotnet_diagnostic.CS0067.severity = none
+dotnet_diagnostic.CS0105.severity = none
+dotnet_diagnostic.CS0108.severity = none
+dotnet_diagnostic.CS0219.severity = none
+dotnet_diagnostic.CS1998.severity = none
+dotnet_diagnostic.CS8765.severity = none
+dotnet_diagnostic.CS0168.severity = none
+dotnet_diagnostic.CS1066.severity = none
+dotnet_diagnostic.CS8767.severity = none
+dotnet_diagnostic.SYSLIB0050.severity = none
+dotnet_diagnostic.CS0078.severity = none
+dotnet_diagnostic.CS0414.severity = none
+dotnet_diagnostic.CS0659.severity = none
+dotnet_diagnostic.CS0661.severity = none
+
+dotnet_diagnostic.CS8600.severity = none
+dotnet_diagnostic.CS8601.severity = none
+dotnet_diagnostic.CS8602.severity = none
+dotnet_diagnostic.CS8603.severity = none
+dotnet_diagnostic.CS8604.severity = none
+dotnet_diagnostic.CS8618.severity = none
+dotnet_diagnostic.CS8619.severity = none
+dotnet_diagnostic.CS8620.severity = none
+dotnet_diagnostic.CS8622.severity = none
+dotnet_diagnostic.CS8625.severity = none
+dotnet_diagnostic.CS8629.severity = none
+
+dotnet_diagnostic.IDISP001.severity = none
+dotnet_diagnostic.IDISP002.severity = none
+dotnet_diagnostic.IDISP003.severity = none
+dotnet_diagnostic.IDISP004.severity = none
+dotnet_diagnostic.IDISP005.severity = none
+dotnet_diagnostic.IDISP006.severity = none
+dotnet_diagnostic.IDISP007.severity = none
+dotnet_diagnostic.IDISP008.severity = none
+dotnet_diagnostic.IDISP009.severity = none
+dotnet_diagnostic.IDISP010.severity = none
+dotnet_diagnostic.IDISP011.severity = none
+dotnet_diagnostic.IDISP012.severity = none
+dotnet_diagnostic.IDISP013.severity = none
+dotnet_diagnostic.IDISP014.severity = none
+dotnet_diagnostic.IDISP015.severity = none
+dotnet_diagnostic.IDISP016.severity = none
+dotnet_diagnostic.IDISP017.severity = none
+dotnet_diagnostic.IDISP018.severity = none
+dotnet_diagnostic.IDISP019.severity = none
+dotnet_diagnostic.IDISP020.severity = none
+dotnet_diagnostic.IDISP023.severity = none

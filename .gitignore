@@ -349,3 +349,8 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /src/Index.App/Properties/launchSettings.json
+
+# Runnable Windows build is tracked. See 정책.md.
+dist/**/*.pdb
+dist/**/index.db
+dist/**/index.db-*
